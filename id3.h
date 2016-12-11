@@ -39,9 +39,6 @@ namespace ItreeAlgo {
     
     //Data Structure to process ID3 algorithm
     class ID3{
-    private:
-        //use vector to check if an attribute was already used for splitting
-        std::vector<float>binCheck = {SENTINEL,0,0,0,0,0,0,0,0,0};
     public:
         //method to return value with number of democrats and republicans
         std::pair<int,int> getPercentages(std::vector<CountyStruct::County>&counties);
@@ -53,10 +50,10 @@ namespace ItreeAlgo {
         float entropyAttr(std::pair<int,int>info, int dataTotal);
         
         //method to get the best split
-        int bestSplit(std::vector<CountyStruct::County> counties);
+        int bestSplit(std::vector<CountyStruct::County> counties,std::vector<float>&splits);
         
         //method to make the tree
-        Itree* makeTree(std::vector<CountyStruct::County>&counties);
+        Itree* makeTree(std::vector<CountyStruct::County>&counties,std::vector<float>splits);
         
         //method to predict given a county
         int predict(CountyStruct::County& aCounty,Itree* headptr);

@@ -56,11 +56,11 @@ namespace ItreeAlgo{
     }
     
     //method to get the best split
-    int ID3:: bestSplit(std::vector<County> counties){
+    int ID3:: bestSplit(std::vector<County> counties,vector<float>&splits){
         //initialize the attribute to return as a negative value
         int max = 0;
-        for(int i =0; i < binCheck.size(); ++i){
-            if (binCheck[i] != SENTINEL){
+        for(int i =0; i < splits.size(); ++i){
+            if (splits[i] != SENTINEL){
                 max = i;
                 break;
             }
@@ -78,7 +78,7 @@ namespace ItreeAlgo{
         for(int i = POPULATION; i < TOTAL_ATTR; ++i){
             
             //check if the attribute was already used for splitting the data
-            if(binCheck[i] != SENTINEL){
+            if(splits[i] != SENTINEL){
             
             //make two bins
             vector<County>leftBin,rightBin;
@@ -109,20 +109,20 @@ namespace ItreeAlgo{
     }
     
     //method to make the tree
-    Itree* ID3:: makeTree(std::vector<County>&counties){
+    Itree* ID3:: makeTree(std::vector<County>&counties,vector<float>splits){
         
         //count the number of attributes the data has been split by
         int counter = 0;
-        for(float v : binCheck){
+        for(float v : splits){
             if(v == SENTINEL){
                 ++counter;
             }
         }
         //base case for recursive call
-        if(counter == binCheck.size() || counties.size() == 0) return nullptr;
+        if(counter == splits.size() || counties.size() == 0) return nullptr;
         
         //find the best attribute to split on
-        int bestAttr = bestSplit(counties);
+        int bestAttr = bestSplit(counties,splits);
         if(bestAttr == -1) return nullptr;
         
         //make the node
@@ -139,11 +139,11 @@ namespace ItreeAlgo{
             else right.push_back(c);
         }
         //check that the attribute was used to split
-        binCheck[bestAttr] = SENTINEL;
+        splits[bestAttr] = SENTINEL;
         
         //make the childs
-        Itree* leftChild = makeTree(left);
-        Itree* rightChild = makeTree(right);
+        Itree* leftChild = makeTree(left,splits);
+        Itree* rightChild = makeTree(right,splits);
         node->leftBin = leftChild;
         node->rightBin = rightChild;
         

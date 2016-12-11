@@ -75,7 +75,7 @@ vector<County> getData(const string& filename){
         //make the county
         County aCounty = County(datas);
         //normalize the county
-        //aCounty.normalize();
+        aCounty.normalize();
         //append it to the set
         dataset.push_back(aCounty);
     }
@@ -129,13 +129,14 @@ int main(int argc, const char * argv[]) {
     //ID3 usage
     //==================================================================//
     //get training data
-    vector<County>trainingData = getData("/Users/mdkabir/Documents/voter_data_machine_learning/votes-train.csv");
+    vector<County>trainingData = getData("/Users/mdkabir/Documents/VoterMLA/VoterMLA/votes-train.csv");
     //initialize id3
     ID3 id3 = ID3();
+    vector<float>checks = {0,0,0,0,0,0,0,0,0,0};
     //make the tree and get the headptr
-    Itree* headptr = id3.makeTree(trainingData);
+    Itree* headptr = id3.makeTree(trainingData,checks);
     //go through testing data
-    vector<County>testingData = getData("/Users/mdkabir/Documents/voter_data_machine_learning/votes-test.csv");
+    vector<County>testingData = getData("/Users/mdkabir/Documents/VoterMLA/VoterMLA/votes-test.csv");
     //keep an accuracy counter
     float correct = 0;
     for(County& c : testingData){
@@ -147,6 +148,7 @@ int main(int argc, const char * argv[]) {
     
      //==================================================================//
      */
+     
      
     
     /*
