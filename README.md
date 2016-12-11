@@ -4,9 +4,9 @@
 ##Table of Contents
 * [Dataset](#dataset)
 * [Supervised Learning] (#supervised-learning)
-  * K-Nearest-Neighbor(#knn)
-  * Perceptron(#perceptron)
-  * ID3 (#id3)
+  * [K-Nearest-Neighbor](#knn)
+  * [Perceptron](#perceptron)
+  * [ID3] (#id3)
 * [Unsupervised Learning] (#unsupervised)
   * K-Means (#k-means)
   * Agglomerative Nesting(#agnes)
@@ -25,6 +25,16 @@ Normalization is necessary for the perceptron algorithm and it is already implem
 | ------------- |:-------------:| -----:|
 | KNN      | 87.25%      |   100% |
 | Perceptron      |    N/A   |   89.96% |
-| ID3 | 83.78%      |    83.78% |
+| ID3 | 86.23%      |    83.78% |
+
+
+##KNN
+For KNN algorithm a simple eucledian distance formula was used for the attribute values to determine the set of nearby neighbors. For this algorithms various sizes of neighbor set were utilized. The best neighbor set size according to statistics was determined to be 7. Based on which candidate majority of candidate voted, the algorithm made prediction. This algorithm had the best performance with respect to accuracy but to make a prediction for one instance it would iterate through the entire dataset, so for each instance in testing set it would iterate through the entire training set.
+
+##Perceptron
+Unlike KNN, the Perceptron algorithm went through the data set only based on the number of times it was trained. For my implementaion, the Perceptron was trained about 5 times. For this algorithm the dataset whether training or testing needs to normalized because it uses this list of weights for each attribute. I initialized a list of weights with the value .1 and set a learning rate of 1, and every iteration of the training set it would attempt to predict 0 or 1 as in which candidate using the weight values and if it guess incorrectly then the weights would be modified based on the learning rate and the error. Every time I trained using Perceptron, I would divide the learning rate by 10 since the next time it goes through the set you would want a smaller effect on the weights. I trained it only 5 times because that returned the best accuracy for the training set.
+
+##ID3
+ID3 is a decision tree that makes smaller subsets of the bigger dataset. It essentially splits the data into smaller subsets using the attribute value. For example, if you set split value to 10,000 for the population size attribute, then every county that has a larger population than that would be in right node otherwise, it would be in left node. For this algorithm, the nodes are rather called bins. This algorithm would split until there is no more attribute to split the data on. The best split 
 
 
